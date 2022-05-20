@@ -2,19 +2,131 @@
   padding: 0px;
   margin: 0px;
 }
+.app {
+background-color:#111;
+color: white;
+}
+
+.navBar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  position: fixed;
+  padding: 20px;
+  height: 25px;
+  /* background-color:#111; */
+  z-index: 1;
+  transition-timing-function: ease-in;
+  transition: all 0.5s
+}
+
+.nav__black {
+  background-color: #111;
+  transform: 0.45s;
+}
+.navBar__netflixLogo {
+  /* position: fixed; */
+  width: 80px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.navBar__profileLogo {
+  /* position: fixed; */
+  width: 50px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+
+.row {
+  margin-left: 20px;
+}
 
 .row__posters {
   display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+
+.row__posters::-webkit-scrollbar {
+  display: none;
 }
 
 .row__poster {
   object-fit: contain;
   width: 100px;
   max-height: 100px;
-  padding: 5px;
   transition: 0.4s;
+  margin-right: 10px;
+}
+
+.row__posters__large {
+  max-height: 250px;
+}
+
+.row__posters__large:hover {
+  transform: scale(1.09);
 }
 
 .row__poster:hover {
-  transform: scale(1.09);
+  transform: scale(1.08);
+}
+
+.banner {
+  height: 448px;
+}
+
+.banner__contents {
+  margin-left: 30px;
+  height: 190px;
+  padding-top: 140px;
+}
+
+.banner__title {
+  font-size: 3rem;
+  font-weight: 800;
+  padding-bottom: 0.3rem;
+} 
+
+.banner__buttons {
+  display: flex;
+  /* width: ; */
+}
+
+.banner__button {
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  border-radius: 0.2vw ;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+  background-color: rgb(51, 51, 51, 0.5);
+  padding-bottom: 0.5rem;
+}
+
+.banner__button:hover {
+  color: #000;
+  background-color: #e6e6e6;
+  transition: all 0.2s;
+}
+
+.banner__description {
+  width: 45rem;
+  line-height: 1.3;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  max-width: 360px;
+  height: 80px;
+}
+
+.banner__fadeBottom {
+  height: 7.4rem;
+  background-image: linear-gradient(180deg, transparent, rgb(37, 37, 37, 0.65), #111);
 }

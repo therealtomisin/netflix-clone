@@ -1,23 +1,20 @@
-// import { request } from 'http'
 import React, {useState, useEffect} from 'react'
 import axios from '../api/axios'
 import requests from '../requests'
+//import Navbar from './NavBar'
 
 
-// interface Movies {
-//     id: number,
-//     name: string,
-//     image: string
-//     poster_path: string
-//     original_title: string
-// }
 interface Movie {
-  mov: any
+     backdrop_path?: string,
+     original_name?: string
+     name?: string,
+     title?: string,
+     overview?: string
 }
 
 const Banner = () => {
 
-    const [movie, setmovie] = useState<Movie[]>([])
+    const [movie, setmovie] = useState<Movie>({})
     const baseUrl: string = 'https://image.tmdb.org/t/p/original/'
 
 
@@ -25,50 +22,47 @@ const Banner = () => {
     useEffect(() => {
       async function fetchData() {
           const request = await axios.get(requests.findNetflixOriginals)
-          console.log([request.data.results[Math.floor(Math.random() * request.data.results.length - 1)]])
-          setmovie([request.data.results[Math.floor(Math.random() * request.data.results.length - 1)]])
+          const returnMovie = request.data.results[Math.floor(Math.random() * request.data.results.length - 1)]
+          console.log(returnMovie)
+          setmovie(returnMovie)
           return request
       }
+
+      fetchData()
     
     }, [])
 
-    // const [movie, setmovie] = useState<Movie>({
-    //     backdrop_path: "",
-    //     name: ''
-    // })
-    // const baseUrl: string = 'https://image.tmdb.org/t/p/original/'
-
-    
-    // useEffect(() => {
-    //   async function fetchdata(){
-    //       const request = await axios.get(requests.findNetflixOriginals)
-    //       setmovie({...movie, backdrop_path: request.data.results[Math.floor(Math.random() * request.data.results.length - 1)]})
-    //       console.log(movie.backdrop_path)
-    //       console.log(request.data.results[Math.floor(Math.random() * request.data.results.length - 1)])
-    //       console.log(`${baseUrl}${movie.backdrop_path}`)
-    //       return request; 
-    //     }
-    //     fetchdata()
-    // }, [])
-    // console.log(request.data.results[Math.floor(Math.random() * request.data.results.length - 1)])
-    // ?.backdrop_path
-    //[Math.floor(Math.random() * request.data.results.length - 1)].backdrop_path
+    const truncate = (str: any, n: number) => {
+        return str?.length > n ? str.substr(0, n-1) + '...' : str;
+    }
 
   return (
     <header className='banner'
     style = {
         {
             backgroundSize: 'cover',
-            backgroundImage: `url(${baseUrl})`,
+            backgroundImage: `url(${baseUrl}${movie.backdrop_path})`,
             backgroundPosition: 'center center'
         }
     }
     >
+        <div className="banner__contents">
+            
+            <h1 className='banner__title'>
+                {movie.original_name || movie.name || movie.title}
+            </h1>
 
-        <div className="banner__content">
-            {movie}
+            <div className="banner__buttons">
+                <button className='banner__button'>Play</button>
+                <button className='banner__button'>My List</button>
+            </div>
+
+            <h1 className='banner__description'>
+                {truncate(movie.overview, 150)}
+            </h1>
         </div>
 
+        <div className='banner__fadeBottom' />
     </header>
   )
 }
